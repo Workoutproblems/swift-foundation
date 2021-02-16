@@ -1,10 +1,8 @@
 
 import SwiftUI
 
-
-
 struct ContentView: View {
-    @State var theTask = Task(
+    @State private var theTask = Task(
         name: "Check all windows",
         isComplete: false,
         lastCompleted: nil)
@@ -16,11 +14,27 @@ struct ContentView: View {
                 theTask.isComplete ? "checkmark.square" : "square")
                 Text(theTask.name)
             }
+            ControlPanel(theTask: self.$theTask)
+        }
+    }
+}
+
+
+struct ControlPanel: View {
+    @Binding var theTask: Task
+    var body: some View {
+        HStack {
             Button(action: {
                 // do something, (closure)
                 theTask.isComplete = true
             }) {
                 Text("Mark Complete")
+            }.padding(.top)
+            Button(action: {
+                // do something, (closure)
+                theTask.isComplete = false
+            }) {
+                Text("Reset Button")
             }.padding(.top)
         }
     }
