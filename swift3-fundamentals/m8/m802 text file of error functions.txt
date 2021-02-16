@@ -1,0 +1,20 @@
+
+// use it
+func checkStatus(serverNumber: Int) -> String {
+    
+    switch serverNumber {
+    case 1:
+        print("You have no connection.") 
+    case 2:
+        print("Authentication failed.")
+    case 3:
+        print("Server 3 is up and running!")
+    default:
+        print("Can't find that server.")
+    }
+    return "Success!"
+}
+
+// handle it
+let result = checkStatus(serverNumber: 1)
+print(result)
