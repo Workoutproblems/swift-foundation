@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94A1F42925DDF27A00E580C0 /* NightWatchTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A1F42825DDF27A00E580C0 /* NightWatchTasks.swift */; };
 		CE03805B255C01AB000F9225 /* NightWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE03805A255C01AB000F9225 /* NightWatchApp.swift */; };
 		CE03805D255C01AB000F9225 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE03805C255C01AB000F9225 /* ContentView.swift */; };
 		CE03805F255C01AD000F9225 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE03805E255C01AD000F9225 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		94A1F42825DDF27A00E580C0 /* NightWatchTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightWatchTasks.swift; sourceTree = "<group>"; };
 		CE038057255C01AB000F9225 /* NightWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NightWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE03805A255C01AB000F9225 /* NightWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightWatchApp.swift; sourceTree = "<group>"; };
 		CE03805C255C01AB000F9225 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				CE03805C255C01AB000F9225 /* ContentView.swift */,
 				CE4C5759255EAE3300678105 /* DetailsView.swift */,
 				CED45EC7257908770090F741 /* Task.swift */,
+				94A1F42825DDF27A00E580C0 /* NightWatchTasks.swift */,
 				CE03805E255C01AD000F9225 /* Assets.xcassets */,
 				CE038063255C01AD000F9225 /* Info.plist */,
 				CE038060255C01AD000F9225 /* Preview Content */,
@@ -148,6 +151,7 @@
 				CE03805D255C01AB000F9225 /* ContentView.swift in Sources */,
 				CE03805B255C01AB000F9225 /* NightWatchApp.swift in Sources */,
 				CE4C575A255EAE3300678105 /* DetailsView.swift in Sources */,
+				94A1F42925DDF27A00E580C0 /* NightWatchTasks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
