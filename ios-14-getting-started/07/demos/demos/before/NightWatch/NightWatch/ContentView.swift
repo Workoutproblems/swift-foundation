@@ -5,6 +5,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var nightWatchTasks: NightWatchTasks
+    @State private var focusModeOn = false
     var body: some View {
         NavigationView {
             List {
@@ -27,39 +28,96 @@ struct ContentView: View {
                         // If I get a Task out of that Binding<[Task]> (task binding), will that element be binded to a Task
                         let theTaskBinding = tasksBinding[taskIndex]
                         
-                        NavigationLink(
-                            destination: DetailsView(task: theTaskBinding),
-                            label: {
-                                TaskRow(task: task)
-                            })
+                        
+                        // Always show with focusMode OFF
+                        // Always show with focusMode ON and task is INCOMPLETE
+                        if focusModeOn == false || (focusModeOn == true && task.isComplete == false) {
+                            NavigationLink(
+                                destination: DetailsView(task: theTaskBinding),
+                                label: {
+                                    TaskRow(task: task)
+                                })
+                        }
+                    })
+                    .onDelete(perform: { indexSet in
+                        nightWatchTasks.nightlyTasks.remove(atOffsets: indexSet)
+                    })
+                    .onMove(perform: { indices, newOffset in
+                        nightWatchTasks.nightlyTasks.move(fromOffsets: indices, toOffset: newOffset)
                     })
                 }
                 
-//                Section(header: TaskSectionHeader(symbolSystemName: "sunset", headerText: "Weekly Tasks"))  {
-//                    ForEach(nightWatchTasks.weeklyTasks, content: {
-//                        task in
-//                        NavigationLink(
-//                            destination: DetailsView(task: task),
-//                            label: {
-//                                TaskRow(task: task)
-//                            })
-//                    })
-//                }
+                Section(header: TaskSectionHeader(symbolSystemName: "sunset", headerText: "Weekly Tasks"))  {
+                    
+                    let taskIndices = nightWatchTasks.weeklyTasks.indices
+                    let tasks = nightWatchTasks.weeklyTasks
+                    let taskIndexPairs = Array(zip(tasks, taskIndices))
+                    
+                    ForEach(taskIndexPairs, id:\.0.id, content: {
+                        task, taskIndex in
+                        
+                        let nightWatchTasksWrapper = $nightWatchTasks
+                        let tasksBinding = nightWatchTasksWrapper.weeklyTasks
+                        let theTaskBinding = tasksBinding[taskIndex]
+
+                        if focusModeOn == false || (focusModeOn == true && task.isComplete == false) {
+                            NavigationLink(
+                                destination: DetailsView(task: theTaskBinding),
+                                label: {
+                                    TaskRow(task: task)
+                                })
+                        }
+                    })
+                    .onDelete(perform: { indexSet in
+                        nightWatchTasks.weeklyTasks.remove(atOffsets: indexSet)
+                    })
+                    .onMove(perform: { indices, newOffset in
+                        nightWatchTasks.weeklyTasks.move(fromOffsets: indices, toOffset: newOffset)
+                    })
+                }
                 
-//                Section(header: TaskSectionHeader(symbolSystemName: "calendar", headerText: "Monthly Tasks"))  {
-//                    ForEach(nightWatchTasks.monthlyTasks, content: {
-//                        task in
-//                        NavigationLink(
-//                            destination: DetailsView(task: task),
-//                            label: {
-//                                TaskRow(task: task)
-//                            })
-//                    })
-//                }
+                Section(header: TaskSectionHeader(symbolSystemName: "calendar", headerText: "Monthly Tasks"))  {
+                    let taskIndices = nightWatchTasks.monthlyTasks.indices
+                    let tasks = nightWatchTasks.monthlyTasks
+                    let taskIndexPairs = Array(zip(tasks, taskIndices))
+                    
+                    ForEach(taskIndexPairs, id:\.0.id, content: {
+                        task, taskIndex in
+                        
+                        let nightWatchTasksWrapper = $nightWatchTasks
+                        let tasksBinding = nightWatchTasksWrapper.monthlyTasks
+                        let theTaskBinding = tasksBinding[taskIndex]
+
+                        if focusModeOn == false || (focusModeOn == true && task.isComplete == false) {
+                            NavigationLink(
+                                destination: DetailsView(task: theTaskBinding),
+                                label: {
+                                    TaskRow(task: task)
+                                })
+                        }
+                    })
+                    .onDelete(perform: { indexSet in
+                        nightWatchTasks.monthlyTasks.remove(atOffsets: indexSet)
+                    })
+                    .onMove(perform: { indices, newOffset in
+                        nightWatchTasks.monthlyTasks.move(fromOffsets: indices, toOffset: newOffset)
+                    })
+                }
             }
             .listStyle(GroupedListStyle())
             .navigationTitle("Home")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    Toggle(isOn: $focusModeOn, label: {
+                        Text("Focus Mode")
+                    })
+                }
+            }
         }
+        
     }
 }
 
